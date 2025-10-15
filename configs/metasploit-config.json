@@ -1,0 +1,130 @@
+{
+  "name": "metasploit",
+  "type": "mcp-server",
+  "description": "Metasploit Framework integration for exploitation and post-exploitation activities",
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-metasploit"
+  ],
+  "env": {
+    "METASPLOIT_PATH": "${MSF_PATH}",
+    "METASPLOIT_DATABASE": "${WORKFLOW_ROOT}/resources/databases/metasploit.db",
+    "METASPLOIT_WORKSPACE": "default"
+  },
+  "authentication": {
+    "type": "local",
+    "requireMsfconsole": true
+  },
+  "features": {
+    "exploitation": {
+      "enabled": true,
+      "actions": ["search", "use", "set", "exploit", "run"]
+    },
+    "payloads": {
+      "enabled": true,
+      "actions": ["generate", "encode", "list", "info"]
+    },
+    "postExploitation": {
+      "enabled": true,
+      "actions": ["migrate", "sysinfo", "getuid", "shell", "meterpreter"]
+    },
+    "database": {
+      "enabled": true,
+      "actions": ["hosts", "services", "vulns", "loot", "notes"]
+    },
+    "auxiliary": {
+      "enabled": true,
+      "actions": ["scan", "discover", "enumerate", "gather"]
+    },
+    "evasion": {
+      "enabled": true,
+      "actions": ["encode", "encrypt", "obfuscate"]
+    }
+  },
+  "security": {
+    "restrictToLocalhost": true,
+    "logAllCommands": true,
+    "requireAuthentication": true,
+    "sanitizeInputs": true,
+    "auditTrail": true
+  },
+  "workspace": {
+    "defaultWorkspace": "default",
+    "autoCreateWorkspace": true,
+    "workspacePrefix": "mcp_",
+    "isolateProjects": true
+  },
+  "integration": {
+    "nmap": {
+      "enabled": true,
+      "importScans": true,
+      "autoImport": false
+    },
+    "burp": {
+      "enabled": false,
+      "importFindings": false
+    },
+    "custom": {
+      "scriptPath": "${WORKFLOW_ROOT}/tools/cybersecurity/metasploit",
+      "customModules": true,
+      "customPayloads": true
+    }
+  },
+  "reporting": {
+    "enabled": true,
+    "formats": ["html", "xml", "json", "pdf"],
+    "outputPath": "${WORKFLOW_ROOT}/resources/reports/metasploit",
+    "includeScreenshots": true,
+    "autoGenerate": false
+  },
+  "performance": {
+    "maxConcurrentSessions": 5,
+    "sessionTimeout": 3600,
+    "maxMemoryUsage": "2GB",
+    "enableCaching": true
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "${WORKFLOW_ROOT}/logs/metasploit.log",
+    "logCommands": true,
+    "logResults": true,
+    "rotateDaily": true
+  },
+  "paths": {
+    "metasploit": "C:\\metasploit-framework",
+    "ruby": "C:\\metasploit-framework\\embedded\\bin\\ruby.exe",
+    "msfconsole": "C:\\metasploit-framework\\bin\\msfconsole.bat",
+    "msfvenom": "C:\\metasploit-framework\\bin\\msfvenom.bat",
+    "database": "${WORKFLOW_ROOT}/resources/databases/metasploit"
+  },
+  "templates": {
+    "basePath": "${WORKFLOW_ROOT}/templates/metasploit",
+    "exploitTemplates": [
+      "web-exploit-template.rb",
+      "buffer-overflow-template.rb",
+      "privilege-escalation-template.rb"
+    ],
+    "payloadTemplates": [
+      "reverse-shell-template.rb",
+      "meterpreter-template.rb",
+      "custom-payload-template.rb"
+    ],
+    "reportTemplates": [
+      "penetration-test-report.html",
+      "vulnerability-assessment-report.xml"
+    ]
+  },
+  "safety": {
+    "confirmDestructiveActions": true,
+    "prohibitedCommands": [
+      "rm -rf",
+      "format",
+      "del /f /s /q"
+    ],
+    "requireExplicitTargets": true,
+    "logAllActivities": true,
+    "restrictNetwork": false
+  }
+}

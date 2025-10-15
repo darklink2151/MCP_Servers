@@ -1,0 +1,48 @@
+{
+  "name": "memory",
+  "type": "mcp-server",
+  "description": "Persistent memory storage for long-term context retention",
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-memory"
+  ],
+  "env": {
+    "MEMORY_STORAGE_PATH": "${WORKFLOW_ROOT}/resources/memory-store"
+  },
+  "storageOptions": {
+    "type": "file",
+    "path": "${WORKFLOW_ROOT}/resources/memory-store",
+    "backupInterval": 3600,
+    "maxBackups": 10,
+    "compressionLevel": "medium"
+  },
+  "memoryFeatures": {
+    "semanticSearch": true,
+    "timestampedEntries": true,
+    "categorization": true,
+    "prioritization": true,
+    "associativeLinks": true
+  },
+  "retention": {
+    "defaultRetentionDays": 180,
+    "importantRetentionDays": 365,
+    "criticalRetentionDays": 730,
+    "maxMemoryItems": 10000
+  },
+  "security": {
+    "encryptedStorage": true,
+    "requireAuthentication": false
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "${WORKFLOW_ROOT}/logs/memory.log",
+    "rotationSize": 10485760
+  },
+  "performance": {
+    "cacheSize": 104857600,
+    "indexingInterval": 300,
+    "maxConcurrentQueries": 5
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "filesystem": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-filesystem"
+    ],
+    "env": {}
+  },
+  "memory": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-memory"
+    ],
+    "env": {}
+  },
+  "github": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ],
+    "env": {}
+  },
+  "brave-search": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-brave-search"
+    ],
+    "env": {}
+  },
+  "fetch": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-fetch"
+    ],
+    "env": {}
+  },
+  "sqlite": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sqlite"
+    ],
+    "env": {}
+  },
+  "puppeteer": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-puppeteer"
+    ],
+    "env": {}
+  },
+  "sequential-thinking": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sequential-thinking"
+    ],
+    "env": {}
+  },
+  "everything": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-everything"
+    ],
+    "env": {}
+  }
+}

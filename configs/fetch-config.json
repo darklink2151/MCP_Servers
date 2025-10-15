@@ -1,0 +1,65 @@
+{
+  "name": "fetch",
+  "type": "mcp-server",
+  "description": "HTTP request client for direct web interactions",
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-fetch"
+  ],
+  "env": {},
+  "requests": {
+    "maxConcurrentRequests": 10,
+    "maxRequestsPerMinute": 120,
+    "timeout": 30000,
+    "retries": 3,
+    "retryDelay": 1000
+  },
+  "httpMethods": {
+    "get": true,
+    "post": true,
+    "put": true,
+    "delete": true,
+    "patch": true,
+    "head": true,
+    "options": true
+  },
+  "security": {
+    "allowCORS": true,
+    "validateSSL": true,
+    "allowedHosts": ["*"],
+    "blockedHosts": [],
+    "maxResponseSize": 20971520,
+    "allowInsecureRequests": false
+  },
+  "authentication": {
+    "supportBasicAuth": true,
+    "supportBearerToken": true,
+    "supportApiKeys": true,
+    "supportOAuth": true
+  },
+  "dataHandling": {
+    "parseJSON": true,
+    "parseXML": true,
+    "parseHTML": true,
+    "parseCSV": true,
+    "binarySupport": true,
+    "compressionSupport": true
+  },
+  "caching": {
+    "enabled": true,
+    "cacheTTL": 300,
+    "ignoreQueryParams": false,
+    "respectCacheHeaders": true,
+    "maxCacheSize": 52428800
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "${WORKFLOW_ROOT}/logs/fetch.log",
+    "logHeaders": true,
+    "logBody": false,
+    "maskSensitiveData": true
+  },
+  "userAgent": "MCP-Workflow-Client/1.0"
+}

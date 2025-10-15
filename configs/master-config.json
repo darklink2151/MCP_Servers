@@ -1,0 +1,214 @@
+{
+  "name": "MCP-Workflow",
+  "version": "1.0.0",
+  "description": "Comprehensive MCP server workflow for enhanced AI capabilities",
+  "author": "DirtyWork AI",
+  "workflowRoot": "${HOME}/MCP-Workflow",
+  "environmentVariables": {
+    "WORKFLOW_ROOT": "${HOME}/MCP-Workflow",
+    "MCP_LOGS_DIR": "${WORKFLOW_ROOT}/logs",
+    "MCP_RESOURCES_DIR": "${WORKFLOW_ROOT}/resources",
+    "MCP_TEMPLATES_DIR": "${WORKFLOW_ROOT}/templates",
+    "MCP_CONFIG_DIR": "${WORKFLOW_ROOT}/configs",
+    "MCP_SCRIPTS_DIR": "${WORKFLOW_ROOT}/scripts",
+    "SYSTEM_ROOT": "C:/",
+    "HOME": "${HOME}",
+    "DOCUMENTS": "${HOME}/Documents",
+    "ONEDRIVE_DOCUMENTS": "${HOME}/OneDrive/Documents",
+    "DOWNLOADS": "${HOME}/Downloads",
+    "DESKTOP": "${HOME}/Desktop"
+  },
+  "servers": {
+    "filesystem": {
+      "configPath": "${WORKFLOW_ROOT}/configs/filesystem-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 100
+    },
+    "memory": {
+      "configPath": "${WORKFLOW_ROOT}/configs/memory-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 90
+    },
+    "github": {
+      "configPath": "${WORKFLOW_ROOT}/configs/github-config.json",
+      "enabled": true,
+      "autostart": false,
+      "priority": 60
+    },
+    "webSearch": {
+      "configPath": "${WORKFLOW_ROOT}/configs/web-search-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 70
+    },
+    "fetch": {
+      "configPath": "${WORKFLOW_ROOT}/configs/fetch-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 65
+    },
+    "sqlite": {
+      "configPath": "${WORKFLOW_ROOT}/configs/sqlite-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 80
+    },
+    "puppeteer": {
+      "configPath": "${WORKFLOW_ROOT}/configs/puppeteer-config.json",
+      "enabled": true,
+      "autostart": false,
+      "priority": 50
+    },
+    "sequentialThinking": {
+      "configPath": "${WORKFLOW_ROOT}/configs/sequential-thinking-config.json",
+      "enabled": true,
+      "autostart": true,
+      "priority": 85
+    },
+    "metasploit": {
+      "configPath": "${WORKFLOW_ROOT}/configs/metasploit-config.json",
+      "enabled": true,
+      "autostart": false,
+      "priority": 40
+    }
+  },
+  "workflows": {
+    "development": {
+      "name": "Software Development",
+      "description": "Workflow for software development tasks",
+      "servers": ["filesystem", "memory", "github", "webSearch", "fetch", "sqlite", "sequentialThinking"],
+      "integrations": {
+        "githubRepos": true,
+        "codeAnalysis": true,
+        "packageManagement": true,
+        "documentationGeneration": true
+      }
+    },
+    "research": {
+      "name": "Research & Analysis",
+      "description": "Workflow for research and data analysis",
+      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "puppeteer", "sequentialThinking"],
+      "integrations": {
+        "dataCollection": true,
+        "literatueReview": true,
+        "statisticalAnalysis": true,
+        "reportGeneration": true
+      }
+    },
+    "contentCreation": {
+      "name": "Content Creation",
+      "description": "Workflow for creating and managing content",
+      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "sequentialThinking"],
+      "integrations": {
+        "ideaGeneration": true,
+        "contentResearch": true,
+        "mediaManagement": true,
+        "publishing": true
+      }
+    },
+    "automation": {
+      "name": "Task Automation",
+      "description": "Workflow for automating repetitive tasks",
+      "servers": ["filesystem", "memory", "fetch", "puppeteer", "sqlite"],
+      "integrations": {
+        "scheduledTasks": true,
+        "webInteractions": true,
+        "dataProcessing": true,
+        "notificationSystem": true
+      }
+    },
+    "projectManagement": {
+      "name": "Project Management",
+      "description": "Workflow for managing projects and resources",
+      "servers": ["filesystem", "memory", "github", "sqlite", "sequentialThinking"],
+      "integrations": {
+        "taskTracking": true,
+        "resourceAllocation": true,
+        "timelineManagement": true,
+        "reportGeneration": true
+      }
+    },
+    "cybersecurity": {
+      "name": "Cybersecurity Operations",
+      "description": "Comprehensive cybersecurity workflow with penetration testing and vulnerability assessment",
+      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "puppeteer", "metasploit", "sequentialThinking"],
+      "integrations": {
+        "penetrationTesting": true,
+        "vulnerabilityAssessment": true,
+        "exploitDevelopment": true,
+        "evidenceCollection": true,
+        "reportGeneration": true,
+        "threatIntelligence": true,
+        "postExploitation": true
+      }
+    },
+    "webDevelopment": {
+      "name": "Web Development",
+      "description": "Modern web development workflow with automated testing and deployment",
+      "servers": ["filesystem", "memory", "github", "webSearch", "fetch", "sqlite", "puppeteer", "sequentialThinking"],
+      "integrations": {
+        "projectScaffolding": true,
+        "developmentServer": true,
+        "automatedTesting": true,
+        "buildOptimization": true,
+        "deploymentAutomation": true,
+        "performanceMonitoring": true,
+        "codeQualityAssurance": true
+      }
+    },
+    "organization": {
+      "name": "System Organization",
+      "description": "Automated file organization, cleanup, and system maintenance",
+      "servers": ["filesystem", "memory", "sqlite", "sequentialThinking"],
+      "integrations": {
+        "fileOrganization": true,
+        "systemCleanup": true,
+        "backupAutomation": true,
+        "projectArchival": true,
+        "performanceOptimization": true,
+        "maintenanceScheduling": true
+      }
+    }
+  },
+  "security": {
+    "encryptSensitiveData": true,
+    "logAccessAttempts": true,
+    "enforcePermissions": true,
+    "separateUserContext": true,
+    "sanitizeInputs": true
+  },
+  "logging": {
+    "centralLogging": true,
+    "logRotation": {
+      "enabled": true,
+      "maxSize": 10485760,
+      "maxFiles": 10
+    },
+    "logFormat": "json",
+    "logLevel": "info"
+  },
+  "backup": {
+    "enabled": true,
+    "schedule": "daily",
+    "location": "${WORKFLOW_ROOT}/backups",
+    "retention": 7,
+    "compression": true
+  },
+  "monitoring": {
+    "enabled": true,
+    "metrics": {
+      "performance": true,
+      "usage": true,
+      "errors": true,
+      "requests": true
+    },
+    "alerts": {
+      "highCPU": true,
+      "highMemory": true,
+      "errors": true,
+      "failedRequests": true
+    }
+  }
+}

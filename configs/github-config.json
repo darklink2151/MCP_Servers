@@ -1,0 +1,70 @@
+{
+  "name": "github",
+  "type": "mcp-server",
+  "description": "GitHub integration for repository operations and collaboration",
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-github"
+  ],
+  "env": {
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+  },
+  "authentication": {
+    "type": "token",
+    "tokenVariable": "GITHUB_TOKEN",
+    "scopes": [
+      "repo",
+      "user",
+      "workflow",
+      "read:org",
+      "read:project"
+    ]
+  },
+  "features": {
+    "repositories": {
+      "enabled": true,
+      "actions": ["create", "fork", "clone", "list", "search", "delete"]
+    },
+    "branches": {
+      "enabled": true,
+      "actions": ["create", "list", "delete", "merge", "protect"]
+    },
+    "pullRequests": {
+      "enabled": true,
+      "actions": ["create", "review", "merge", "list", "close"]
+    },
+    "issues": {
+      "enabled": true,
+      "actions": ["create", "update", "comment", "close", "list"]
+    },
+    "code": {
+      "enabled": true,
+      "actions": ["search", "view", "edit", "commit", "push"]
+    },
+    "workflows": {
+      "enabled": true,
+      "actions": ["trigger", "view", "list"]
+    }
+  },
+  "defaultSettings": {
+    "defaultVisibility": "private",
+    "defaultBranch": "main",
+    "autoInitialize": true,
+    "licenseName": "mit"
+  },
+  "rateLimit": {
+    "maxRequestsPerHour": 5000,
+    "maxConcurrentRequests": 10
+  },
+  "caching": {
+    "enabled": true,
+    "cacheTTL": 300,
+    "maxCacheSize": 52428800
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "${WORKFLOW_ROOT}/logs/github.log"
+  }
+}

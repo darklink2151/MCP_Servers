@@ -1,0 +1,59 @@
+# Warp MCP Configuration
+# This configuration file is shared between Cursor and Warp for consistency
+
+[mcp]
+# Base configuration
+config_dir = "C:\\Users\\beckd\\MCP_Servers\\configs"
+log_dir = "C:\\Users\\beckd\\MCP_Servers\\logs"
+data_dir = "C:\\Users\\beckd\\MCP_Servers\\data"
+
+# Servers configuration
+[mcp.servers.filesystem]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\beckd\\MCP_Servers"]
+env = {}
+
+[mcp.servers.memory]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-memory"]
+env = {}
+
+[mcp.servers.sequential_thinking]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+env = {}
+
+[mcp.servers.everything_search]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-everything"]
+env = {}
+
+[mcp.servers.puppeteer]
+command = "npx"
+args = ["-y", "@todoforai/puppeteer-mcp-server"]
+env = {}
+
+# Workflow configurations
+[mcp.workflows.development]
+name = "Software Development"
+servers = ["filesystem", "memory", "sequential_thinking", "everything_search"]
+
+[mcp.workflows.research]
+name = "Research & Analysis"
+servers = ["filesystem", "memory", "sequential_thinking", "everything_search", "puppeteer"]
+
+[mcp.workflows.automation]
+name = "Task Automation"
+servers = ["filesystem", "memory", "puppeteer", "everything_search"]
+
+# Security settings
+[mcp.security]
+encrypt_sensitive_data = true
+log_access_attempts = true
+enforce_permissions = true
+
+# Logging configuration
+[mcp.logging]
+level = "info"
+format = "json"
+rotation = { max_size = "10MB", max_files = 10 }

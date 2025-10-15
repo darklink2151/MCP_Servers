@@ -1,0 +1,74 @@
+{
+  "name": "sqlite",
+  "type": "mcp-server",
+  "description": "SQLite database integration for structured data storage and analysis",
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-sqlite"
+  ],
+  "env": {},
+  "database": {
+    "defaultLocation": "${WORKFLOW_ROOT}/resources/databases",
+    "maxDatabaseSize": 1073741824,
+    "maxDatabases": 10,
+    "autoBackup": true,
+    "backupInterval": 3600,
+    "maxBackups": 5
+  },
+  "security": {
+    "enableEncryption": true,
+    "requireAuthentication": false,
+    "allowRemoteAccess": false,
+    "allowedOperations": [
+      "read",
+      "write",
+      "create",
+      "alter",
+      "delete",
+      "index"
+    ]
+  },
+  "performance": {
+    "maxConnectionPoolSize": 10,
+    "statementCacheSize": 100,
+    "journalMode": "WAL",
+    "synchronous": "NORMAL",
+    "tempStore": "MEMORY",
+    "mmap": true
+  },
+  "queryLimits": {
+    "maxQueryTimeout": 30000,
+    "maxRowsReturned": 10000,
+    "maxQueryLength": 8192,
+    "maxConcurrentQueries": 5
+  },
+  "features": {
+    "fullTextSearch": true,
+    "jsonSupport": true,
+    "spatialExtensions": false,
+    "mathFunctions": true,
+    "cryptoFunctions": true,
+    "compressionSupport": true,
+    "csvImportExport": true,
+    "backupRestore": true,
+    "schemaManagement": true,
+    "virtualTables": true
+  },
+  "templates": {
+    "basePath": "${WORKFLOW_ROOT}/templates/sqlite",
+    "defaultSchemas": [
+      "analytics.sql",
+      "projects.sql",
+      "knowledge_base.sql"
+    ]
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "path": "${WORKFLOW_ROOT}/logs/sqlite.log",
+    "logQueries": true,
+    "logQueryPlans": false,
+    "logPerformance": true
+  }
+}

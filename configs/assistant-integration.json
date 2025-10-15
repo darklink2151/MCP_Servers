@@ -1,0 +1,17 @@
+{
+  "assistant": {
+    "selfManaged": true,
+    "separationFromCursor": true,
+    "mcpServersAccessible": true,
+    "collaborativeWithCursor": true,
+    "allowedServers": [
+      "filesystem", "memory", "github", "web-search", "fetch", "sqlite", "puppeteer", "sequential-thinking"
+    ],
+    "usageModes": [
+      "independent", "collaborative"
+    ],
+    "loggingEnabled": true,
+    "documentationPath": "MCP-Workflow/docs/assistant-access.md",
+    "note": "Ensure all MCP operations maintain clear separation from any Cursor-specific processes/configs, unless expressly collaborating."
+  }
+}

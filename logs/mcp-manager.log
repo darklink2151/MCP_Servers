@@ -1,0 +1,44 @@
+[2025-10-15 19:07:17] [INFO] MCP Manager started - Action: start, Server: all, Workflow: development
+[2025-10-15 19:07:17] [ERROR] Workflow not found: development
+[2025-10-15 19:07:17] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:07:17] [INFO] MCP Manager started - Action: status, Server: all, Workflow: development
+[2025-10-15 19:07:17] [INFO] Checking MCP server status
+[2025-10-15 19:07:17] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:07:17] [INFO] MCP Manager started - Action: backup, Server: all, Workflow: development
+[2025-10-15 19:07:17] [INFO] Creating MCP configuration backup
+[2025-10-15 19:07:17] [SUCCESS] Backup created: C:\Users\beckd\MCP_Servers\backups\mcp-backup-20251015-190717
+[2025-10-15 19:07:17] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:08:19] [INFO] MCP Manager started - Action: install, Server: all, Workflow: development
+[2025-10-15 19:08:19] [INFO] Installing MCP servers...
+[2025-10-15 19:08:52] [SUCCESS] MCP servers installation completed
+[2025-10-15 19:08:52] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:10:12] [INFO] MCP Manager started - Action: install, Server: all, Workflow: development
+[2025-10-15 19:10:12] [INFO] Installing MCP servers...
+[2025-10-15 19:11:06] [INFO] MCP Manager started - Action: install, Server: all, Workflow: development
+[2025-10-15 19:11:06] [INFO] Installing MCP servers...
+[2025-10-15 19:12:05] [SUCCESS] MCP servers installation completed
+[2025-10-15 19:12:05] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:13:00] [INFO] MCP Manager started - Action: start, Server: all, Workflow: development
+[2025-10-15 19:13:00] [ERROR] Workflow not found: development
+[2025-10-15 19:13:00] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:13:04] [INFO] MCP Manager started - Action: status, Server: all, Workflow: development
+[2025-10-15 19:13:04] [INFO] Checking MCP server status
+[2025-10-15 19:13:04] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:13:07] [INFO] MCP Manager started - Action: backup, Server: all, Workflow: development
+[2025-10-15 19:13:07] [INFO] Creating MCP configuration backup
+[2025-10-15 19:13:07] [SUCCESS] Backup created: C:\Users\beckd\MCP_Servers\backups\mcp-backup-20251015-191307
+[2025-10-15 19:13:07] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:13:45] [INFO] MCP Manager started - Action: start, Server: all, Workflow: development
+[2025-10-15 19:13:45] [INFO] Starting workflow: development
+[2025-10-15 19:13:45] [INFO] Starting MCP server: filesystem
+[2025-10-15 19:13:45] [ERROR] Failed to start filesystem: This command cannot be run due to the error: %1 is not a valid Win32 application.
+[2025-10-15 19:13:46] [INFO] Starting MCP server: memory
+[2025-10-15 19:13:46] [ERROR] Failed to start memory: This command cannot be run due to the error: %1 is not a valid Win32 application.
+[2025-10-15 19:13:47] [INFO] Starting MCP server: sequential-thinking
+[2025-10-15 19:13:47] [ERROR] Failed to start sequential-thinking: This command cannot be run due to the error: %1 is not a valid Win32 application.
+[2025-10-15 19:13:48] [INFO] Starting MCP server: everything-search
+[2025-10-15 19:13:48] [ERROR] Failed to start everything-search: This command cannot be run due to the error: %1 is not a valid Win32 application.
+[2025-10-15 19:13:49] [SUCCESS] MCP Manager completed successfully
+[2025-10-15 19:14:05] [INFO] MCP Manager started - Action: status, Server: all, Workflow: development
+[2025-10-15 19:14:05] [INFO] Checking MCP server status
+[2025-10-15 19:14:05] [SUCCESS] MCP Manager completed successfully
