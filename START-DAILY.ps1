@@ -21,7 +21,7 @@ Write-Host "🚀 Starting daily MCP environment..." -ForegroundColor Cyan
 $optimizedScript = Join-Path $PSScriptRoot "scripts" "Start-Optimized.ps1"
 if (Test-Path $optimizedScript) {
     Write-Host "🚀 Using optimized startup method..." -ForegroundColor Green
-    & $optimizedScript -Workflow $defaultWorkflow -CleanFirst
+    & $optimizedScript -WorkflowName $defaultWorkflow -ConfigPath $masterConfig
 } else {
     Write-Host "⚠️ Optimized script not found, using legacy method..." -ForegroundColor Yellow
     # Fallback to original method
