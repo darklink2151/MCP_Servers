@@ -65,24 +65,36 @@ function Start-MCPServer {
         return $true
     }
 
-    # Start the server
+    # Start the server using PowerShell's Start-Process for better compatibility
     try {
         $command = $ServerConfig.command
         $args = $ServerConfig.args
 
-        # Create process info
-        $startInfo = New-Object System.Diagnostics.ProcessStartInfo
-        $startInfo.FileName = $command
-        $startInfo.Arguments = $args -join " "
-        $startInfo.UseShellExecute = $false
-        $startInfo.CreateNoWindow = $true
-        $startInfo.RedirectStandardOutput = $true
-        $startInfo.RedirectStandardError = $true
+        # Handle npx as a PowerShell script
+        if ($command -eq "npx") {
+            $npxPath = Get-Command npx -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source
+            if (-not $npxPath) {
+                throw "npx not found in PATH"
+            }
 
-        # Start process
-        $process = New-Object System.Diagnostics.Process
-        $process.StartInfo = $startInfo
-        $process.Start() | Out-Null
+            $processArgs = @{
+                FilePath = "powershell.exe"
+                ArgumentList = @("-NoProfile", "-Command", "& `"$npxPath`" $($args -join ' ')")
+                NoNewWindow = $true
+                PassThru = $true
+                ErrorAction = "Stop"
+            }
+        } else {
+            $processArgs = @{
+                FilePath = $command
+                ArgumentList = $args
+                NoNewWindow = $true
+                PassThru = $true
+                ErrorAction = "Stop"
+            }
+        }
+
+        $process = Start-Process @processArgs
 
         Write-StartupLog "  ✓ Started server '$ServerName' (PID: $($process.Id))" -Color "Green"
 
@@ -92,6 +104,7 @@ function Start-MCPServer {
         Write-StartupLog "  ✗ Failed to start $ServerName`: $($_.Exception.Message)" -Color "Red"
         return $false
     }
+}
 
 function Start-MCPWorkflow {
     param (
