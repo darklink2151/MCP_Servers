@@ -51,13 +51,13 @@ try {
         description = "AI model interactions (Claude, Ollama)"
     }
 
-    # Check if servers property exists as PSCustomObject
-    if ($null -eq $masterConfig.servers) {
-        $masterConfig | Add-Member -MemberType NoteProperty -Name "servers" -Value ([PSCustomObject]@{})
+    # Check if mcp.servers property exists as PSCustomObject
+    if ($null -eq $masterConfig.mcp.servers) {
+        $masterConfig.mcp | Add-Member -MemberType NoteProperty -Name "servers" -Value ([PSCustomObject]@{})
     }
 
     # Add ai server to servers
-    $masterConfig.servers | Add-Member -MemberType NoteProperty -Name "ai" -Value $aiServerProperty -Force
+    $masterConfig.mcp.servers | Add-Member -MemberType NoteProperty -Name "ai" -Value $aiServerProperty -Force
 
     # Add AI workflow
     $aiWorkflow = @{
@@ -67,12 +67,12 @@ try {
         autostart = $false
     }
 
-    if ($null -eq $masterConfig.workflows) {
-        $masterConfig | Add-Member -MemberType NoteProperty -Name "workflows" -Value ([PSCustomObject]@{})
+    if ($null -eq $masterConfig.mcp.workflows) {
+        $masterConfig.mcp | Add-Member -MemberType NoteProperty -Name "workflows" -Value ([PSCustomObject]@{})
     }
 
-    # Add aiDevelopment workflow
-    $masterConfig.workflows | Add-Member -MemberType NoteProperty -Name "aiDevelopment" -Value $aiWorkflow -Force
+    # Add ai_development workflow
+    $masterConfig.mcp.workflows | Add-Member -MemberType NoteProperty -Name "ai_development" -Value $aiWorkflow -Force
 
     # Save the updated master config
     $masterConfigJson = $masterConfig | ConvertTo-Json -Depth 10
@@ -107,7 +107,7 @@ personality = "professional"
 
 Write-Host "`n🚀 AI Server integration complete!" -ForegroundColor Cyan
 Write-Host "To use the AI server, run:" -ForegroundColor Yellow
-Write-Host ".\START-MCP.ps1 -Workflow aiDevelopment" -ForegroundColor White
+Write-Host ".\START-MCP.ps1 -Workflow ai_development" -ForegroundColor White
 Write-Host "`nMake sure you have the AI package installed:" -ForegroundColor Yellow
 Write-Host "npm install -g @modelcontextprotocol/server-ai" -ForegroundColor White
 

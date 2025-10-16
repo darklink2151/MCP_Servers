@@ -75,9 +75,9 @@ function Get-MCPServersStatus {
     # Read master config to get server list
     if (Test-Path $Script:MasterConfig) {
         $config = Get-Content $Script:MasterConfig -Raw | ConvertFrom-Json
-        $status.Total = $config.servers.PSObject.Properties.Count
+        $status.Total = $config.mcp.servers.PSObject.Properties.Count
 
-        foreach ($server in $config.servers.PSObject.Properties) {
+        foreach ($server in $config.mcp.servers.PSObject.Properties) {
             $serverName = $server.Name
             $serverConfig = $server.Value
 
@@ -168,7 +168,7 @@ function Show-WorkflowsMenu {
     Write-Host ""
 
     $i = 1
-    foreach ($workflow in $config.workflows.PSObject.Properties | Sort-Object Name) {
+    foreach ($workflow in $config.mcp.workflows.PSObject.Properties | Sort-Object Name) {
         $name = $workflow.Name
         $details = $workflow.Value
         $serverCount = $details.servers.Count
@@ -239,7 +239,7 @@ function Start-AutostartServers {
 
 function Start-WorkflowInteractive {
     Write-Host ""
-    $workflows = @("development", "research", "automation", "cybersecurity", "organization", "webDevelopment", "contentCreation", "projectManagement", "aiDevelopment")
+    $workflows = @("development", "research", "automation", "ai_development")
 
     Write-Host "Select workflow:" -ForegroundColor $Script:Colors.Info
     for ($i = 0; $i -lt $workflows.Count; $i++) {

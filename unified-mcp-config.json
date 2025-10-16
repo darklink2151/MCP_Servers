@@ -1,88 +1,13 @@
 {
-  "name": "Unified MCP Configuration",
-  "version": "2.0.0",
-  "description": "Centralized MCP server configuration for Cursor and Warp",
-  "author": "DirtyWork AI",
-  "created": "2025-01-15",
-  "basePaths": {
-    "configDir": "C:\\Users\\beckd\\MCP_Servers\\configs",
-    "logDir": "C:\\Users\\beckd\\MCP_Servers\\logs",
-    "dataDir": "C:\\Users\\beckd\\MCP_Servers\\data",
-    "scriptDir": "C:\\Users\\beckd\\MCP_Servers\\scripts",
-    "docDir": "C:\\Users\\beckd\\MCP_Servers\\docs"
+  "master": {
+    "config_path": "configs/master-config.json"
   },
-  "servers": {
-    "filesystem": {
-      "name": "Filesystem Server",
-      "description": "File system operations and management",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\beckd\\MCP_Servers"],
-      "env": {},
-      "enabled": true,
-      "priority": 100,
-      "autostart": true
-    },
-    "memory": {
-      "name": "Memory Server",
-      "description": "Persistent memory and knowledge graph management",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {},
-      "enabled": true,
-      "priority": 90,
-      "autostart": true
-    },
-    "sequential-thinking": {
-      "name": "Sequential Thinking Server",
-      "description": "Advanced reasoning and problem-solving capabilities",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "env": {},
-      "enabled": true,
-      "priority": 85,
-      "autostart": true
-    },
-    "everything-search": {
-      "name": "Everything Search Server",
-      "description": "Fast file search using Everything Search Engine",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-everything"],
-      "env": {},
-      "enabled": true,
-      "priority": 75,
-      "autostart": true
-    }
+  "cursor": {
+    "config_path": "cursor-mcp-config.json"
   },
-  "workflows": {
-    "development": {
-      "name": "Software Development",
-      "description": "Complete development workflow",
-      "servers": ["filesystem", "memory", "sequential-thinking", "everything-search"],
-      "integrations": {
-        "codeAnalysis": true,
-        "fileManagement": true,
-        "documentation": true
-      }
-    },
-    "research": {
-      "name": "Research & Analysis",
-      "description": "Comprehensive research workflow",
-      "servers": ["filesystem", "memory", "sequential-thinking", "everything-search"],
-      "integrations": {
-        "dataCollection": true,
-        "analysis": true,
-        "reportGeneration": true
-      }
-    },
-    "automation": {
-      "name": "Task Automation",
-      "description": "Automated workflow for system management",
-      "servers": ["filesystem", "memory", "everything-search"],
-      "integrations": {
-        "fileManagement": true,
-        "systemMonitoring": true,
-        "automation": true
-      }
-    }
-  }
+  "warp": {
+    "config_path": "warp-mcp-config.toml"
+  },
+  "last_updated": "2025-10-16",
+  "version": "2.0.0"
 }

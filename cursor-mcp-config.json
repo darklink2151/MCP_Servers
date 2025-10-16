@@ -1,45 +1,84 @@
 {
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\beckd\\MCP_Servers"
-      ],
-      "env": {}
-    },
-    "memory": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ],
-      "env": {}
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "env": {}
-    },
-    "everything-search": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-everything"
-      ],
-      "env": {}
-    },
-    "puppeteer": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@todoforai/puppeteer-mcp-server"
-      ],
-      "env": {}
-    }
+  "mcp": {
+    "servers": [
+      {
+        "name": "filesystem",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "C:\\Users\\beckd",
+          "C:\\",
+          "C:\\Users\\beckd\\Documents",
+          "C:\\Users\\beckd\\OneDrive\\Documents",
+          "C:\\Users\\beckd\\Downloads",
+          "C:\\Users\\beckd\\Desktop"
+        ]
+      },
+      {
+        "name": "memory",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-memory"
+        ]
+      },
+      {
+        "name": "sequential-thinking",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking"
+        ]
+      },
+      {
+        "name": "everything",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-everything"
+        ]
+      },
+      {
+        "name": "web-search",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-brave-search"
+        ]
+      },
+      {
+        "name": "fetch",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-fetch"
+        ]
+      },
+      {
+        "name": "sqlite",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-sqlite"
+        ]
+      },
+      {
+        "name": "github",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-github"
+        ]
+      },
+      {
+        "name": "puppeteer",
+        "command": "npx",
+        "args": [
+          "-y",
+          "@todoforai/puppeteer-mcp-server"
+        ]
+      }
+    ]
   }
 }

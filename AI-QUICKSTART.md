@@ -13,18 +13,18 @@ The AI server extends your MCP environment with advanced AI capabilities, includ
 
 ```powershell
 # Start AI Development workflow
-.\START-MCP.ps1 -Workflow aiDevelopment
+.\START-MCP.ps1 -Workflow ai_development
 
 # Or use the dashboard
 .\START-MCP.ps1 -Dashboard
-# Then select [1] Start Workflow → aiDevelopment
+# Then select [1] Start Workflow → ai_development
 ```
 
 ## 📋 What's Included
 
 The AI integration includes:
 
-- **AI Server Configuration**: `configs/ai-config.json`
+- **AI Server Configuration**: `configs/ai-config.toml`
 - **AI Behavior Settings**: `configs/ai-config.toml`
 - **AI Development Workflow**: In master configuration
 - **Dashboard Integration**: AI workflow in the MCP Dashboard
@@ -129,7 +129,7 @@ For local AI models:
 
 ## 🚀 Next Steps
 
-1. Start exploring with: `.\START-MCP.ps1 -Workflow aiDevelopment`
+1. Start exploring with: `.\START-MCP.ps1 -Workflow ai_development`
 2. Customize `configs/ai-config.toml` with your preferred settings
 3. Try different AI models for various tasks
 

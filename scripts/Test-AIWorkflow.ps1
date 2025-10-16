@@ -16,22 +16,19 @@ if (Test-Path $masterConfigPath) {
         $masterConfig = Get-Content $masterConfigPath -Raw | ConvertFrom-Json
 
         # Check for AI server
-        if ($masterConfig.servers.ai) {
+        if ($masterConfig.mcp.servers.ai) {
             Write-Host "✅ AI server defined in master config" -ForegroundColor Green
-            Write-Host "   Priority: $($masterConfig.servers.ai.priority)" -ForegroundColor Gray
-            Write-Host "   Enabled: $($masterConfig.servers.ai.enabled)" -ForegroundColor Gray
-            Write-Host "   Config Path: $($masterConfig.servers.ai.configPath)" -ForegroundColor Gray
+            Write-Host "   Config Path: $($masterConfig.mcp.servers.ai.configPath)" -ForegroundColor Gray
         } else {
             Write-Host "❌ AI server not found in master config" -ForegroundColor Red
             Write-Host "   Please run SETUP-AI-SERVER.ps1" -ForegroundColor Yellow
         }
 
         # Check for AI workflow
-        if ($masterConfig.workflows.aiDevelopment) {
+        if ($masterConfig.mcp.workflows.ai_development) {
             Write-Host "✅ AI Development workflow defined" -ForegroundColor Green
-            Write-Host "   Name: $($masterConfig.workflows.aiDevelopment.name)" -ForegroundColor Gray
-            Write-Host "   Description: $($masterConfig.workflows.aiDevelopment.description)" -ForegroundColor Gray
-            Write-Host "   Servers: $($masterConfig.workflows.aiDevelopment.servers -join ', ')" -ForegroundColor Gray
+            Write-Host "   Name: $($masterConfig.mcp.workflows.ai_development.name)" -ForegroundColor Gray
+            Write-Host "   Servers: $($masterConfig.mcp.workflows.ai_development.servers -join ', ')" -ForegroundColor Gray
         } else {
             Write-Host "❌ AI Development workflow not found" -ForegroundColor Red
             Write-Host "   Please run SETUP-AI-SERVER.ps1" -ForegroundColor Yellow
@@ -78,7 +75,7 @@ $dashboardPath = "scripts\MCP-Dashboard.ps1"
 if (Test-Path $dashboardPath) {
     try {
         $dashboardContent = Get-Content -Path $dashboardPath -Raw
-        if ($dashboardContent -like "*aiDevelopment*") {
+        if ($dashboardContent -like "*ai_development*") {
             Write-Host "✅ Dashboard contains AI workflow references" -ForegroundColor Green
         } else {
             Write-Host "⚠️ Dashboard does not contain AI workflow references" -ForegroundColor Yellow
@@ -93,6 +90,6 @@ if (Test-Path $dashboardPath) {
 
 Write-Host ""
 Write-Host "Test complete!" -ForegroundColor Cyan
-Write-Host "To start the AI workflow, run: .\START-MCP.ps1 -Workflow aiDevelopment" -ForegroundColor White
+Write-Host "To start the AI workflow, run: .\START-MCP.ps1 -Workflow ai_development" -ForegroundColor White
 Write-Host ""
 
