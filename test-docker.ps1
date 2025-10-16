@@ -47,7 +47,7 @@ try {
     docker build -t docker-test . > $null 2>&1
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ Docker Build: Success" -ForegroundColor Green
-        
+
         Write-Host "`n6. Testing Docker Run..." -ForegroundColor Yellow
         docker run --rm docker-test > $null 2>&1
         if ($LASTEXITCODE -eq 0) {
