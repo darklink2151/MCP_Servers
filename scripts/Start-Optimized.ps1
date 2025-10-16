@@ -89,7 +89,7 @@ function Start-MCPServer {
         return $true
     }
     catch {
-        Write-StartupLog "  ✗ Failed to start $ServerName: $($_.Exception.Message)" -Color "Red"
+        Write-StartupLog "  ✗ Failed to start $ServerName`: $($_.Exception.Message)" -Color "Red"
         return $false
     }
 
