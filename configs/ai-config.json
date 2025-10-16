@@ -1,25 +1,17 @@
 {
-  "version": "1.0.0",
   "command": "npx",
+  "version": "1.0.0",
+  "description": "MCP server for AI model interactions (Claude, Ollama)",
+  "env": {},
+  "name": "ai-server",
   "options": {
-    "logLevel": "info",
     "host": "localhost",
     "port": 7800
   },
-  "healthCheck": {
-    "endpoint": "/health",
-    "timeout": 10,
-    "interval": 60
-  },
-  "description": "MCP server for AI model interactions (Claude, Ollama)",
   "args": [
     "-y",
     "@modelcontextprotocol/server-ai",
     "--config",
-    "${WORKFLOW_ROOT}/configs/ai-config.toml"
-  ],
-  "env": {
-    "ANTHROPIC_API_KEY": "${env:ANTHROPIC_API_KEY}"
-  },
-  "name": "ai-server"
+    "configs/ai-config.toml"
+  ]
 }

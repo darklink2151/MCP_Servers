@@ -239,7 +239,7 @@ function Start-AutostartServers {
 
 function Start-WorkflowInteractive {
     Write-Host ""
-    $workflows = @("development", "research", "automation", "cybersecurity", "organization", "webDevelopment", "contentCreation", "projectManagement", "aiDevelopment")
+    $workflows = @("development", "research", "automation", "cybersecurity", "organization", "webDevelopment", "contentCreation", "projectManagement")
 
     Write-Host "Select workflow:" -ForegroundColor $Script:Colors.Info
     for ($i = 0; $i -lt $workflows.Count; $i++) {
@@ -451,4 +451,3 @@ switch ($Mode) {
     "health" { Show-SystemHealth }
     default { Start-Dashboard }
 }
-

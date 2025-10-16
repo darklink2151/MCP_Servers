@@ -71,3 +71,4 @@ Write-Host "     configs\ai-config.toml" -ForegroundColor White
 Write-Host ""
 Write-Host "That's it! Your AI server is ready to use." -ForegroundColor Green
 Write-Host ""
+

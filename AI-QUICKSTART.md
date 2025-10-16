@@ -142,3 +142,4 @@ For local AI models:
 ---
 
 Happy coding with your new AI-enhanced environment!
+

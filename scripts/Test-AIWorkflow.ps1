@@ -14,7 +14,7 @@ $masterConfigPath = "configs\master-config.json"
 if (Test-Path $masterConfigPath) {
     try {
         $masterConfig = Get-Content $masterConfigPath -Raw | ConvertFrom-Json
-        
+
         # Check for AI server
         if ($masterConfig.servers.ai) {
             Write-Host "✅ AI server defined in master config" -ForegroundColor Green
@@ -56,7 +56,7 @@ if (Test-Path $aiConfigPath) {
 $aiTomlPath = "configs\ai-config.toml"
 if (Test-Path $aiTomlPath) {
     Write-Host "✅ AI config TOML found at: $aiTomlPath" -ForegroundColor Green
-    
+
     try {
         $content = Get-Content $aiTomlPath -Raw
         Write-Host "   TOML settings:" -ForegroundColor Gray
@@ -95,3 +95,4 @@ Write-Host ""
 Write-Host "Test complete!" -ForegroundColor Cyan
 Write-Host "To start the AI workflow, run: .\START-MCP.ps1 -Workflow aiDevelopment" -ForegroundColor White
 Write-Host ""
+

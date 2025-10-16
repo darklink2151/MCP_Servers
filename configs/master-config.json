@@ -72,13 +72,28 @@
       "enabled": true,
       "autostart": false,
       "priority": 40
+    },
+    "ai": {
+      "priority": 95,
+      "enabled": true,
+      "autostart": false,
+      "configPath": "/configs/ai-config.json",
+      "description": "AI model interactions (Claude, Ollama)"
     }
   },
   "workflows": {
     "development": {
       "name": "Software Development",
       "description": "Workflow for software development tasks",
-      "servers": ["filesystem", "memory", "github", "webSearch", "fetch", "sqlite", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "github",
+        "webSearch",
+        "fetch",
+        "sqlite",
+        "sequentialThinking"
+      ],
       "integrations": {
         "githubRepos": true,
         "codeAnalysis": true,
@@ -89,7 +104,15 @@
     "research": {
       "name": "Research & Analysis",
       "description": "Workflow for research and data analysis",
-      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "puppeteer", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "webSearch",
+        "fetch",
+        "sqlite",
+        "puppeteer",
+        "sequentialThinking"
+      ],
       "integrations": {
         "dataCollection": true,
         "literatueReview": true,
@@ -100,7 +123,14 @@
     "contentCreation": {
       "name": "Content Creation",
       "description": "Workflow for creating and managing content",
-      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "webSearch",
+        "fetch",
+        "sqlite",
+        "sequentialThinking"
+      ],
       "integrations": {
         "ideaGeneration": true,
         "contentResearch": true,
@@ -111,7 +141,13 @@
     "automation": {
       "name": "Task Automation",
       "description": "Workflow for automating repetitive tasks",
-      "servers": ["filesystem", "memory", "fetch", "puppeteer", "sqlite"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "fetch",
+        "puppeteer",
+        "sqlite"
+      ],
       "integrations": {
         "scheduledTasks": true,
         "webInteractions": true,
@@ -122,7 +158,13 @@
     "projectManagement": {
       "name": "Project Management",
       "description": "Workflow for managing projects and resources",
-      "servers": ["filesystem", "memory", "github", "sqlite", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "github",
+        "sqlite",
+        "sequentialThinking"
+      ],
       "integrations": {
         "taskTracking": true,
         "resourceAllocation": true,
@@ -133,7 +175,16 @@
     "cybersecurity": {
       "name": "Cybersecurity Operations",
       "description": "Comprehensive cybersecurity workflow with penetration testing and vulnerability assessment",
-      "servers": ["filesystem", "memory", "webSearch", "fetch", "sqlite", "puppeteer", "metasploit", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "webSearch",
+        "fetch",
+        "sqlite",
+        "puppeteer",
+        "metasploit",
+        "sequentialThinking"
+      ],
       "integrations": {
         "penetrationTesting": true,
         "vulnerabilityAssessment": true,
@@ -147,7 +198,16 @@
     "webDevelopment": {
       "name": "Web Development",
       "description": "Modern web development workflow with automated testing and deployment",
-      "servers": ["filesystem", "memory", "github", "webSearch", "fetch", "sqlite", "puppeteer", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "github",
+        "webSearch",
+        "fetch",
+        "sqlite",
+        "puppeteer",
+        "sequentialThinking"
+      ],
       "integrations": {
         "projectScaffolding": true,
         "developmentServer": true,
@@ -161,7 +221,12 @@
     "organization": {
       "name": "System Organization",
       "description": "Automated file organization, cleanup, and system maintenance",
-      "servers": ["filesystem", "memory", "sqlite", "sequentialThinking"],
+      "servers": [
+        "filesystem",
+        "memory",
+        "sqlite",
+        "sequentialThinking"
+      ],
       "integrations": {
         "fileOrganization": true,
         "systemCleanup": true,
@@ -170,6 +235,20 @@
         "performanceOptimization": true,
         "maintenanceScheduling": true
       }
+    },
+    "aiDevelopment": {
+      "servers": [
+        "filesystem",
+        "memory",
+        "github",
+        "webSearch",
+        "sqlite",
+        "sequentialThinking",
+        "ai"
+      ],
+      "name": "AI Development",
+      "autostart": false,
+      "description": "Workflow for developing and interacting with AI models"
     }
   },
   "security": {

@@ -31,15 +31,15 @@ if ($dashboardContent -like "*aiDevelopment*") {
 # Update the workflow selection list
 try {
     $updated = $dashboardContent -replace '(\$workflows = @\()("development", "research", "automation", "cybersecurity", "organization", "webDevelopment", "contentCreation", "projectManagement")(\))', '$1$2, "aiDevelopment"$3'
-    
+
     Set-Content -Path $dashboardPath -Value $updated -Force
     Write-Host "✅ Successfully updated MCP Dashboard" -ForegroundColor Green
-    
+
     # Update the AI workflow display
     $aiFunctionality = @"
     • aiDevelopment - AI model development
 "@
-    
+
     $updated = $updated -replace '(Quick Workflows:.+?\n.+?daily.+?\n.+?development.+?\n.+?research.+?\n.+?cybersecurity.+?\n)', "`$1    • aiDevelopment - AI model development`n"
     Set-Content -Path $dashboardPath -Value $updated -Force
 
@@ -52,3 +52,4 @@ try {
 
 Write-Host "`n🚀 Dashboard update complete!" -ForegroundColor Cyan
 Write-Host "The AI Development workflow is now available in the dashboard" -ForegroundColor Green
+

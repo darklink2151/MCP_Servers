@@ -55,7 +55,7 @@ try {
     if ($null -eq $masterConfig.servers) {
         $masterConfig | Add-Member -MemberType NoteProperty -Name "servers" -Value ([PSCustomObject]@{})
     }
-    
+
     # Add ai server to servers
     $masterConfig.servers | Add-Member -MemberType NoteProperty -Name "ai" -Value $aiServerProperty -Force
 
@@ -110,3 +110,4 @@ Write-Host "To use the AI server, run:" -ForegroundColor Yellow
 Write-Host ".\START-MCP.ps1 -Workflow aiDevelopment" -ForegroundColor White
 Write-Host "`nMake sure you have the AI package installed:" -ForegroundColor Yellow
 Write-Host "npm install -g @modelcontextprotocol/server-ai" -ForegroundColor White
+
