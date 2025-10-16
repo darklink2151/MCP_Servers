@@ -37,12 +37,12 @@ Write-Host "✅ Workflow '$defaultWorkflow' started" -ForegroundColor Green
 # Launch dashboard if enabled
 if ($startDashboard) {
     Write-Host "📊 Starting MCP Dashboard..." -ForegroundColor Cyan
-    Start-Process pwsh -ArgumentList "-NoExit -File `"$(Join-Path $PSScriptRoot "scripts" "Simple-Dashboard.ps1")`"" -WindowStyle Normal
+    Start-Process pwsh -ArgumentList "-NoExit -File `"$(Join-Path $PSScriptRoot "scripts" "Minimal-Dashboard.ps1")`"" -WindowStyle Normal
 }
 
 # Output quick help
 Write-Host "`n📋 Quick Reference:" -ForegroundColor Yellow
-Write-Host "  • Dashboard: .\scripts\Simple-Dashboard.ps1" -ForegroundColor White
+Write-Host "  • Dashboard: .\scripts\Minimal-Dashboard.ps1" -ForegroundColor White
 Write-Host "  • Status Check: .\scripts\Get-MCPStatus.ps1" -ForegroundColor White
 Write-Host "  • Stop All: .\scripts\Stop-AllMCP.ps1" -ForegroundColor White
 Write-Host "  • Change Workflow: .\START-DAILY.ps1 [workflowName]" -ForegroundColor White
