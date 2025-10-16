@@ -20,6 +20,11 @@ function Update-MCPServers {
     node scripts/install-mcp-servers-fixed.js
 }
 
+# Docker helper
+function Ensure-DockerConfig {
+    & "$PSScriptRoot\ensure-docker-config.ps1"
+}
+
 function Backup-MCPWorkflow {
     Set-Location "$PSScriptRoot\.."
     node scripts/mcp-cli.js backup

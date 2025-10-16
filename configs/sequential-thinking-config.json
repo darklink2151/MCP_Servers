@@ -1,117 +1,16 @@
 {
-  "name": "sequential-thinking",
-  "type": "mcp-server",
-  "description": "Advanced problem-solving through structured, reflective thinking processes",
-  "command": "cmd.exe",
+  "name": "sequential-thinking-server",
+  "options": {
+    "logLevel": "info",
+    "host": "localhost",
+    "port": 7805
+  },
   "args": [
-    "/c",
-    "npx",
     "-y",
     "@modelcontextprotocol/server-sequential-thinking"
   ],
+  "command": "npx",
+  "description": "MCP server for advanced reasoning",
   "env": {},
-  "thinking": {
-    "defaultThoughtCount": 8,
-    "maxThoughtCount": 20,
-    "initialThoughtTypes": [
-      "problem_definition",
-      "information_gathering",
-      "hypothesis_generation"
-    ],
-    "middleThoughtTypes": [
-      "analysis",
-      "comparison",
-      "evaluation",
-      "reflection"
-    ],
-    "finalThoughtTypes": [
-      "conclusion",
-      "solution",
-      "recommendation",
-      "action_plan"
-    ]
-  },
-  "features": {
-    "thoughtRevision": true,
-    "thoughtBranching": true,
-    "selfCorrection": true,
-    "dynamicThoughtCount": true,
-    "uncertaintyExpression": true,
-    "hypothesisTesting": true,
-    "algorithmicThinking": true,
-    "analogicalReasoning": true
-  },
-  "domainSpecificMethods": {
-    "computerScience": {
-      "enabled": true,
-      "algorithmicAnalysis": true,
-      "complexityAssessment": true,
-      "dataStructureSelection": true,
-      "systemArchitecture": true,
-      "debugging": true
-    },
-    "businessAnalysis": {
-      "enabled": true,
-      "costBenefitAnalysis": true,
-      "riskAssessment": true,
-      "marketAnalysis": true,
-      "processOptimization": true
-    },
-    "research": {
-      "enabled": true,
-      "literatureReview": true,
-      "methodologySelection": true,
-      "dataAnalysis": true,
-      "conclusionFormation": true
-    },
-    "creativeProjects": {
-      "enabled": true,
-      "ideation": true,
-      "conceptDevelopment": true,
-      "prototyping": true,
-      "iteration": true
-    }
-  },
-  "visualization": {
-    "enabled": true,
-    "graphRepresentation": true,
-    "treeStructure": true,
-    "flowDiagrams": true,
-    "mindMaps": true
-  },
-  "memory": {
-    "persistThoughts": true,
-    "referenceEarlierThoughts": true,
-    "thoughtVersioning": true,
-    "crossProblemLearning": true
-  },
-  "output": {
-    "formats": [
-      "structured",
-      "narrative",
-      "bullet_points",
-      "code",
-      "pseudocode",
-      "table",
-      "diagram"
-    ],
-    "detailLevels": [
-      "summary",
-      "detailed",
-      "comprehensive"
-    ]
-  },
-  "logging": {
-    "enabled": true,
-    "level": "info",
-    "path": "${WORKFLOW_ROOT}/logs/sequential-thinking.log",
-    "includeThoughtProcess": true,
-    "includeRevisionsAndBranches": true
-  },
-  "integration": {
-    "puppeteerIntegration": true,
-    "sqliteIntegration": true,
-    "githubIntegration": true,
-    "filesystemIntegration": true
-  }
+  "version": "2.0.0"
 }

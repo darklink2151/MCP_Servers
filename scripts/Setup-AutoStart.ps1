@@ -15,10 +15,10 @@ param(
     [Parameter()]
     [ValidateSet("Login", "Boot", "Both")]
     [string]$TriggerType = "Login",
-    
+
     [Parameter()]
     [int]$DelaySeconds = 10,
-    
+
     [Parameter()]
     [switch]$Remove
 )
@@ -42,7 +42,7 @@ function Write-Log {
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "[$timestamp] [$Level] $Message"
     Add-Content -Path $LogFile -Value $logMessage
-    
+
     switch ($Level) {
         "ERROR" { Write-Host $Message -ForegroundColor Red }
         "WARN" { Write-Host $Message -ForegroundColor Yellow }
@@ -59,9 +59,9 @@ function Test-Administrator {
 
 function Remove-AutoStartTasks {
     Write-Log "Removing existing auto-start tasks..." "INFO"
-    
+
     $tasks = @("$TaskBaseName-Login", "$TaskBaseName-Boot", $TaskBaseName)
-    
+
     foreach ($taskName in $tasks) {
         $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
         if ($task) {
@@ -78,18 +78,18 @@ function Remove-AutoStartTasks {
 function New-LoginAutoStartTask {
     $taskName = "$TaskBaseName-Login"
     Write-Log "Creating login auto-start task: $taskName" "INFO"
-    
+
     # Action: Run PowerShell script
     $action = New-ScheduledTaskAction `
         -Execute "pwsh.exe" `
         -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$AutostartScript`""
-    
+
     # Trigger: At user logon with delay
     $trigger = New-ScheduledTaskTrigger -AtLogon -User $env:USERNAME
     if ($DelaySeconds -gt 0) {
         $trigger.Delay = "PT$($DelaySeconds)S"
     }
-    
+
     # Settings
     $settings = New-ScheduledTaskSettingsSet `
         -AllowStartIfOnBatteries `
@@ -98,13 +98,13 @@ function New-LoginAutoStartTask {
         -ExecutionTimeLimit (New-TimeSpan -Hours 0) `
         -RestartCount 3 `
         -RestartInterval (New-TimeSpan -Minutes 1)
-    
+
     # Principal: Current user, highest privileges
     $principal = New-ScheduledTaskPrincipal `
         -UserId $env:USERNAME `
         -LogonType Interactive `
         -RunLevel Highest
-    
+
     try {
         Register-ScheduledTask `
             -TaskName $taskName `
@@ -114,7 +114,7 @@ function New-LoginAutoStartTask {
             -Principal $principal `
             -Description "Auto-start MCP servers when user logs in (${env:USERNAME})" `
             -Force | Out-Null
-        
+
         Write-Log "  ✓ Login task created successfully" "SUCCESS"
         Write-Log "    Trigger: At logon (delay: ${DelaySeconds}s)" "INFO"
         return $true
@@ -127,23 +127,23 @@ function New-LoginAutoStartTask {
 function New-BootAutoStartTask {
     $taskName = "$TaskBaseName-Boot"
     Write-Log "Creating boot auto-start task: $taskName" "INFO"
-    
+
     if (-not (Test-Administrator)) {
         Write-Log "  ⚠ Administrator privileges required for boot trigger. Skipping..." "WARN"
         return $false
     }
-    
+
     # Action: Run PowerShell script
     $action = New-ScheduledTaskAction `
         -Execute "pwsh.exe" `
         -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$AutostartScript`""
-    
+
     # Trigger: At system startup with delay
     $trigger = New-ScheduledTaskTrigger -AtStartup
     if ($DelaySeconds -gt 0) {
         $trigger.Delay = "PT$($DelaySeconds)S"
     }
-    
+
     # Settings
     $settings = New-ScheduledTaskSettingsSet `
         -AllowStartIfOnBatteries `
@@ -152,13 +152,13 @@ function New-BootAutoStartTask {
         -ExecutionTimeLimit (New-TimeSpan -Hours 0) `
         -RestartCount 3 `
         -RestartInterval (New-TimeSpan -Minutes 1)
-    
+
     # Principal: System account with highest privileges
     $principal = New-ScheduledTaskPrincipal `
         -UserId $env:USERNAME `
         -LogonType S4U `
         -RunLevel Highest
-    
+
     try {
         Register-ScheduledTask `
             -TaskName $taskName `
@@ -168,7 +168,7 @@ function New-BootAutoStartTask {
             -Principal $principal `
             -Description "Auto-start MCP servers at system boot" `
             -Force | Out-Null
-        
+
         Write-Log "  ✓ Boot task created successfully" "SUCCESS"
         Write-Log "    Trigger: At startup (delay: ${DelaySeconds}s)" "INFO"
         return $true
@@ -184,9 +184,9 @@ function Show-TaskStatus {
     Write-Host "         AUTO-START TASK STATUS" -ForegroundColor Cyan
     Write-Host "═══════════════════════════════════════════════════" -ForegroundColor Cyan
     Write-Host ""
-    
+
     $tasks = Get-ScheduledTask -TaskName "$TaskBaseName*" -ErrorAction SilentlyContinue
-    
+
     if ($tasks) {
         foreach ($task in $tasks) {
             $statusColor = if ($task.State -eq "Ready") { "Green" } else { "Yellow" }
@@ -195,14 +195,14 @@ function Show-TaskStatus {
             Write-Host "  State: " -NoNewline
             Write-Host "$($task.State)" -ForegroundColor $statusColor
             Write-Host "  Next Run: " -NoNewline
-            
+
             $info = Get-ScheduledTaskInfo -TaskName $task.TaskName -ErrorAction SilentlyContinue
             if ($info.NextRunTime) {
                 Write-Host "$($info.NextRunTime)" -ForegroundColor Gray
             } else {
                 Write-Host "At next trigger event" -ForegroundColor Gray
             }
-            
+
             if ($info.LastRunTime -ne $null) {
                 Write-Host "  Last Run: " -NoNewline
                 Write-Host "$($info.LastRunTime)" -ForegroundColor Gray
@@ -210,14 +210,14 @@ function Show-TaskStatus {
                 $resultColor = if ($info.LastTaskResult -eq 0) { "Green" } else { "Red" }
                 Write-Host "0x$($info.LastTaskResult.ToString('X'))" -ForegroundColor $resultColor
             }
-            
+
             Write-Host ""
         }
     } else {
         Write-Host "  No auto-start tasks found" -ForegroundColor Yellow
         Write-Host ""
     }
-    
+
     Write-Host "═══════════════════════════════════════════════════" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -276,16 +276,16 @@ if ($success) {
     Write-Log "✓ Auto-start setup completed successfully!" "SUCCESS"
     Write-Host ""
     Write-Host "  MCP servers will now automatically start when:" -ForegroundColor Green
-    
+
     switch ($TriggerType) {
         "Login" { Write-Host "    • You log in to Windows" -ForegroundColor Gray }
         "Boot" { Write-Host "    • Windows starts up" -ForegroundColor Gray }
-        "Both" { 
-            Write-Host "    • Windows starts up" -ForegroundColor Gray 
-            Write-Host "    • You log in to Windows" -ForegroundColor Gray 
+        "Both" {
+            Write-Host "    • Windows starts up" -ForegroundColor Gray
+            Write-Host "    • You log in to Windows" -ForegroundColor Gray
         }
     }
-    
+
     if ($DelaySeconds -gt 0) {
         Write-Host "    • With a ${DelaySeconds} second delay for system stability" -ForegroundColor Gray
     }
@@ -301,4 +301,3 @@ Show-TaskStatus
 
 Write-Log "Auto-start setup finished" "INFO"
 Write-Host ""
-

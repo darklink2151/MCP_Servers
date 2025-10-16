@@ -1,75 +1,18 @@
 {
-  "name": "filesystem",
-  "type": "mcp-server",
-  "description": "Enhanced filesystem access with advanced capabilities",
-  "command": "cmd.exe",
+  "name": "filesystem-server",
+  "options": {
+    "logLevel": "info",
+    "host": "localhost",
+    "port": 7803
+  },
   "args": [
-    "/c",
-    "npx",
     "-y",
     "@modelcontextprotocol/server-filesystem",
-    "C:\\Users\\beckd",
     "C:\\",
-    "C:\\Users\\beckd\\Documents",
-    "C:\\Users\\beckd\\OneDrive\\Documents",
-    "C:\\Users\\beckd\\Downloads",
-    "C:\\Users\\beckd\\Desktop"
+    "C:\\Users\\beckd"
   ],
+  "command": "npx",
+  "description": "MCP server for filesystem operations",
   "env": {},
-  "permissions": [
-    "read",
-    "write",
-    "delete",
-    "search"
-  ],
-  "workspacePaths": [
-    {
-      "name": "home",
-      "path": "${HOME}",
-      "description": "User home directory"
-    },
-    {
-      "name": "system",
-      "path": "${SYSTEM_ROOT}",
-      "description": "System root directory"
-    },
-    {
-      "name": "documents",
-      "path": "${DOCUMENTS}",
-      "description": "User documents directory"
-    },
-    {
-      "name": "downloads",
-      "path": "${DOWNLOADS}",
-      "description": "User downloads directory"
-    },
-    {
-      "name": "desktop",
-      "path": "${DESKTOP}",
-      "description": "User desktop directory"
-    }
-  ],
-  "maxFileSize": 52428800,
-  "allowedExtensions": ["*"],
-  "disallowedExtensions": [
-    ".exe",
-    ".dll",
-    ".sys",
-    ".bin"
-  ],
-  "securityLevel": "high",
-  "logging": {
-    "enabled": true,
-    "level": "info",
-    "path": "${WORKFLOW_ROOT}/logs/filesystem.log"
-  },
-  "caching": {
-    "enabled": true,
-    "maxCacheSize": 104857600,
-    "cacheTTL": 3600
-  },
-  "throttling": {
-    "maxRequestsPerMinute": 300,
-    "maxConcurrentRequests": 10
-  }
+  "version": "2.0.0"
 }

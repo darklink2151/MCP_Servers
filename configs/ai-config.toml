@@ -1,0 +1,53 @@
+# AI Configuration Settings
+# This file controls AI behavior and model settings
+
+[ai.general]
+# General AI behavior settings
+temperature = 0.7
+max_tokens = 2000
+top_p = 0.95
+frequency_penalty = 0.0
+presence_penalty = 0.0
+
+[ai.models]
+# Default model configurations
+default_model = "claude-3-sonnet"
+fallback_model = "claude-2"
+
+# Ollama integration settings
+[ai.ollama]
+enabled = true
+host = "http://localhost:11434"
+models = [
+    "llama2",
+    "codellama",
+    "mistral"
+]
+default_model = "codellama"
+
+[ai.behavior]
+# Customize AI assistant behavior
+personality = "professional"
+expertise_level = "expert"
+code_style = "clean"
+documentation = "detailed"
+error_handling = "thorough"
+
+[ai.memory]
+# Memory and context settings
+context_window = 4000
+memory_persistence = true
+memory_store_path = "resources/memory-store"
+
+[ai.security]
+# Security and access control
+api_key_required = true
+api_key_env_var = "MCP_AI_KEY"
+allowed_domains = ["localhost", "127.0.0.1"]
+
+[ai.logging]
+# Logging configuration
+level = "info"
+path = "logs/ai-interactions.log"
+max_size = "10MB"
+max_files = 5

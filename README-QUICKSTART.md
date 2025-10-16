@@ -317,9 +317,8 @@ C:\Users\beckd\MCP_Servers\
 
 ---
 
-**Version:** 2.0.0  
-**Author:** DirtyWork AI  
+**Version:** 2.0.0
+**Author:** DirtyWork AI
 **Last Updated:** 2025-10-16
 
 🚀 **Happy Hacking!** 🚀
-

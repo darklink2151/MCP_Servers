@@ -1,61 +1,23 @@
 {
-  "name": "web-search",
-  "type": "mcp-server",
-  "description": "Web search integration for real-time information retrieval",
-  "command": "cmd.exe",
+  "version": "2.0.0",
+  "command": "npx",
+  "options": {
+    "logLevel": "info",
+    "host": "localhost",
+    "port": 7802
+  },
+  "healthCheck": {
+    "endpoint": "/health",
+    "timeout": 15,
+    "interval": 120
+  },
+  "description": "MCP server for web search via Brave Search API",
   "args": [
-    "/c",
-    "npx",
     "-y",
     "@modelcontextprotocol/server-brave-search"
   ],
   "env": {
-    "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+    "BRAVE_API_KEY": "${env:BRAVE_API_KEY}"
   },
-  "search": {
-    "defaultEngine": "brave",
-    "backupEngines": ["duckduckgo"],
-    "resultsPerQuery": 10,
-    "maxQueriesPerMinute": 30,
-    "safeSearch": false,
-    "regionCode": "US",
-    "languageCode": "en"
-  },
-  "contentTypes": {
-    "text": true,
-    "images": true,
-    "videos": true,
-    "news": true,
-    "maps": false
-  },
-  "filters": {
-    "excludeDomains": [],
-    "includeDomains": [],
-    "minDate": "",
-    "maxDate": ""
-  },
-  "features": {
-    "snippetExtraction": true,
-    "contentSummarization": true,
-    "entityRecognition": true,
-    "imageSearchIntegration": true,
-    "videoSearchIntegration": true,
-    "translationSupport": true
-  },
-  "caching": {
-    "enabled": true,
-    "cacheTTL": 1800,
-    "maxCacheSize": 104857600
-  },
-  "security": {
-    "encryptQueryLogs": true,
-    "anonymizeQueries": false,
-    "restrictedContentFilter": true
-  },
-  "logging": {
-    "enabled": true,
-    "level": "info",
-    "path": "${WORKFLOW_ROOT}/logs/web-search.log",
-    "retentionDays": 30
-  }
+  "name": "web-search-server"
 }

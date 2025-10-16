@@ -441,10 +441,9 @@ Your MCP server infrastructure is now:
 
 ---
 
-**Version:** 2.0.0  
-**Setup Date:** 2025-10-16  
-**System:** Windows 11 (beckd@fuku)  
+**Version:** 2.0.0
+**Setup Date:** 2025-10-16
+**System:** Windows 11 (beckd@fuku)
 **Status:** ✅ FULLY OPERATIONAL
 
 **🎯 Go build something amazing! 🎯**
-

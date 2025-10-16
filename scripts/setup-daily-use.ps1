@@ -4,7 +4,8 @@
 param(
     [switch]$AddToStartup = $true,
     [switch]$CreateDesktopShortcuts = $true,
-    [switch]$SetupPowerShellProfile = $true
+    [switch]$SetupPowerShellProfile = $true,
+    [switch]$EnsureDockerConfig = $true
 )
 
 $WorkflowRoot = "C:\Users\beckd\MCP-Workflow"
@@ -121,7 +122,18 @@ Write-Host "🔧 Setting up environment variables..." -ForegroundColor Yellow
 
 Write-Host "✅ Environment variables set" -ForegroundColor Green
 
-# 6. Test the setup
+# 6. Ensure Docker BuildKit GC config (optional)
+if ($EnsureDockerConfig) {
+    Write-Host "🐳 Ensuring Docker BuildKit GC configuration..." -ForegroundColor Yellow
+    try {
+        & "$PSScriptRoot\ensure-docker-config.ps1" | Out-Null
+        Write-Host "✅ Docker config ensured" -ForegroundColor Green
+    } catch {
+        Write-Host "⚠️ Failed to ensure Docker config (continuing)" -ForegroundColor Yellow
+    }
+}
+
+# 7. Test the setup
 Write-Host "🧪 Testing MCP setup..." -ForegroundColor Yellow
 
 try {
@@ -133,7 +145,7 @@ try {
     Write-Host "⚠️ MCP server test had issues (this may be normal)" -ForegroundColor Yellow
 }
 
-# 7. Create Quick Start Guide
+# 8. Create Quick Start Guide
 $quickStartGuide = @"
 # MCP Workflow - Quick Start Guide
 

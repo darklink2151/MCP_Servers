@@ -1,99 +1,16 @@
 {
-  "name": "puppeteer",
-  "type": "mcp-server",
-  "description": "Browser automation for web interaction and scraping",
-  "command": "cmd.exe",
+  "name": "puppeteer-server",
+  "options": {
+    "logLevel": "info",
+    "host": "localhost",
+    "port": 7806
+  },
   "args": [
-    "/c",
-    "npx",
     "-y",
     "@todoforai/puppeteer-mcp-server"
   ],
+  "command": "npx",
+  "description": "MCP server for browser automation",
   "env": {},
-  "browser": {
-    "headless": "new",
-    "defaultViewport": {
-      "width": 1280,
-      "height": 800,
-      "deviceScaleFactor": 1
-    },
-    "slowMo": 0,
-    "timeout": 30000,
-    "args": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-accelerated-2d-canvas",
-      "--no-first-run",
-      "--no-zygote"
-    ],
-    "ignoreHTTPSErrors": true
-  },
-  "operations": {
-    "navigation": true,
-    "screenshots": true,
-    "elementInteraction": true,
-    "formFilling": true,
-    "dataExtraction": true,
-    "scriptExecution": true,
-    "fileDownload": true,
-    "fileUpload": false
-  },
-  "security": {
-    "allowDangerous": false,
-    "allowedDomains": ["*"],
-    "blockedDomains": [
-      "localhost",
-      "127.0.0.1",
-      "10.*.*.*",
-      "172.16.*.*",
-      "192.168.*.*"
-    ],
-    "disableCookies": false,
-    "clearBrowserDataAfterUse": true,
-    "disallowedOperations": [
-      "fileSystem",
-      "alert",
-      "print"
-    ]
-  },
-  "performance": {
-    "maxConcurrentBrowsers": 2,
-    "maxConcurrentPages": 5,
-    "maxUptime": 3600,
-    "restartAfterRequests": 100,
-    "cacheEnabled": true,
-    "resourceTypes": {
-      "document": true,
-      "stylesheet": true,
-      "image": true,
-      "media": true,
-      "font": true,
-      "script": true,
-      "xhr": true,
-      "fetch": true,
-      "other": true
-    }
-  },
-  "storage": {
-    "screenshotsPath": "${WORKFLOW_ROOT}/resources/screenshots",
-    "downloadsPath": "${WORKFLOW_ROOT}/resources/downloads",
-    "maxStorageSize": 1073741824
-  },
-  "logging": {
-    "enabled": true,
-    "level": "info",
-    "path": "${WORKFLOW_ROOT}/logs/puppeteer.log",
-    "logNavigation": true,
-    "logActions": true,
-    "logErrors": true
-  },
-  "templates": {
-    "basePath": "${WORKFLOW_ROOT}/templates/puppeteer",
-    "defaultScripts": [
-      "login.js",
-      "search.js",
-      "extract.js"
-    ]
-  }
+  "version": "2.0.0"
 }

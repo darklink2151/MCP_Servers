@@ -80,7 +80,7 @@ function Get-MCPServersStatus {
         foreach ($server in $config.servers.PSObject.Properties) {
             $serverName = $server.Name
             $serverConfig = $server.Value
-            
+
             $isRunning = $mcpProcesses | Where-Object {
                 $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $($_.Id)" -ErrorAction SilentlyContinue).CommandLine
                 $cmdLine -like "*$serverName*"
@@ -110,23 +110,23 @@ function Get-MCPServersStatus {
 
 function Show-ServerStatus {
     param($Status)
-    
+
     Write-Host "╔═══════════════════════ SERVER STATUS ════════════════════════╗" -ForegroundColor $Script:Colors.Title
     Write-Host ""
-    
+
     $runningCount = $Status.Running.Count
     $totalCount = $Status.Total
     $healthPercent = if ($totalCount -gt 0) { [math]::Round(($runningCount / $totalCount) * 100, 0) } else { 0 }
-    
-    $healthColor = if ($healthPercent -ge 80) { $Script:Colors.Success } 
-                   elseif ($healthPercent -ge 50) { $Script:Colors.Warning } 
+
+    $healthColor = if ($healthPercent -ge 80) { $Script:Colors.Success }
+                   elseif ($healthPercent -ge 50) { $Script:Colors.Warning }
                    else { $Script:Colors.Error }
-    
+
     Write-Host "  Overall Health: " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "$healthPercent% " -NoNewline -ForegroundColor $healthColor
     Write-Host "($runningCount/$totalCount servers running)" -ForegroundColor $Script:Colors.Dim
     Write-Host ""
-    
+
     if ($Status.Running.Count -gt 0) {
         Write-Host "  ✓ RUNNING SERVERS:" -ForegroundColor $Script:Colors.Success
         foreach ($server in $Status.Running | Sort-Object Priority -Descending) {
@@ -138,7 +138,7 @@ function Show-ServerStatus {
         }
         Write-Host ""
     }
-    
+
     if ($Status.Stopped.Count -gt 0) {
         Write-Host "  ✗ STOPPED SERVERS:" -ForegroundColor $Script:Colors.Warning
         foreach ($server in $Status.Stopped | Sort-Object Priority -Descending) {
@@ -151,7 +151,7 @@ function Show-ServerStatus {
         }
         Write-Host ""
     }
-    
+
     Write-Host "╚═══════════════════════════════════════════════════════════════╝" -ForegroundColor $Script:Colors.Title
     Write-Host ""
 }
@@ -163,16 +163,16 @@ function Show-WorkflowsMenu {
     }
 
     $config = Get-Content $Script:MasterConfig -Raw | ConvertFrom-Json
-    
+
     Write-Host "╔═══════════════════════ WORKFLOWS ════════════════════════════╗" -ForegroundColor $Script:Colors.Title
     Write-Host ""
-    
+
     $i = 1
     foreach ($workflow in $config.workflows.PSObject.Properties | Sort-Object Name) {
         $name = $workflow.Name
         $details = $workflow.Value
         $serverCount = $details.servers.Count
-        
+
         Write-Host "  [$i] " -NoNewline -ForegroundColor $Script:Colors.Highlight
         Write-Host "$($details.name) " -NoNewline -ForegroundColor $Script:Colors.Success
         Write-Host "($name)" -ForegroundColor $Script:Colors.Dim
@@ -182,7 +182,7 @@ function Show-WorkflowsMenu {
         Write-Host ""
         $i++
     }
-    
+
     Write-Host "╚═══════════════════════════════════════════════════════════════╝" -ForegroundColor $Script:Colors.Title
     Write-Host ""
 }
@@ -194,27 +194,27 @@ function Show-MainMenu {
     Write-Host "Start Workflow          " -NoNewline -ForegroundColor $Script:Colors.Success
     Write-Host "  [2] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Start All Autostart" -ForegroundColor $Script:Colors.Success
-    
+
     Write-Host "  [3] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Stop All Servers        " -NoNewline -ForegroundColor $Script:Colors.Warning
     Write-Host "  [4] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Restart All" -ForegroundColor $Script:Colors.Warning
-    
+
     Write-Host "  [5] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "View Logs               " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "  [6] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "System Health" -ForegroundColor $Script:Colors.Info
-    
+
     Write-Host "  [7] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Create Backup           " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "  [8] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Setup Auto-Start" -ForegroundColor $Script:Colors.Info
-    
+
     Write-Host "  [R] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Refresh Status          " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "  [Q] " -NoNewline -ForegroundColor $Script:Colors.Highlight
     Write-Host "Quit" -ForegroundColor $Script:Colors.Error
-    
+
     Write-Host ""
     Write-Host "╚═══════════════════════════════════════════════════════════════╝" -ForegroundColor $Script:Colors.Title
     Write-Host ""
@@ -224,14 +224,14 @@ function Start-AutostartServers {
     Write-Host ""
     Write-Host "🚀 Starting all autostart servers..." -ForegroundColor $Script:Colors.Info
     Write-Host ""
-    
+
     $cliPath = Join-Path $Script:ScriptsDir "mcp-cli.js"
     if (Test-Path $cliPath) {
         & node $cliPath start-autostart -c $Script:MasterConfig
     } else {
         Write-Host "  ✗ mcp-cli.js not found!" -ForegroundColor $Script:Colors.Error
     }
-    
+
     Write-Host ""
     Write-Host "Press any key to continue..." -ForegroundColor $Script:Colors.Dim
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -240,26 +240,26 @@ function Start-AutostartServers {
 function Start-WorkflowInteractive {
     Write-Host ""
     $workflows = @("development", "research", "automation", "cybersecurity", "organization", "webDevelopment", "contentCreation", "projectManagement")
-    
+
     Write-Host "Select workflow:" -ForegroundColor $Script:Colors.Info
     for ($i = 0; $i -lt $workflows.Count; $i++) {
         Write-Host "  [$($i+1)] $($workflows[$i])" -ForegroundColor $Script:Colors.Highlight
     }
     Write-Host ""
-    
+
     $selection = Read-Host "Enter number"
     if ($selection -match '^\d+$' -and [int]$selection -ge 1 -and [int]$selection -le $workflows.Count) {
         $workflow = $workflows[[int]$selection - 1]
         Write-Host ""
         Write-Host "🚀 Starting workflow: $workflow" -ForegroundColor $Script:Colors.Success
         Write-Host ""
-        
+
         $cliPath = Join-Path $Script:ScriptsDir "mcp-cli.js"
         if (Test-Path $cliPath) {
             & node $cliPath start-workflow $workflow -c $Script:MasterConfig
         }
     }
-    
+
     Write-Host ""
     Write-Host "Press any key to continue..." -ForegroundColor $Script:Colors.Dim
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -269,12 +269,12 @@ function Stop-AllMCPServers {
     Write-Host ""
     Write-Host "🛑 Stopping all MCP servers..." -ForegroundColor $Script:Colors.Warning
     Write-Host ""
-    
+
     $mcpProcesses = Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object {
         $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $($_.Id)" -ErrorAction SilentlyContinue).CommandLine
         $cmdLine -like "*@modelcontextprotocol*" -or $cmdLine -like "*puppeteer-mcp*"
     }
-    
+
     if ($mcpProcesses) {
         foreach ($proc in $mcpProcesses) {
             Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
@@ -283,7 +283,7 @@ function Stop-AllMCPServers {
     } else {
         Write-Host "  ℹ No MCP servers running" -ForegroundColor $Script:Colors.Info
     }
-    
+
     Write-Host ""
     Write-Host "Press any key to continue..." -ForegroundColor $Script:Colors.Dim
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -293,7 +293,7 @@ function Show-SystemHealth {
     Write-Host ""
     Write-Host "╔═══════════════════════ SYSTEM HEALTH ════════════════════════╗" -ForegroundColor $Script:Colors.Title
     Write-Host ""
-    
+
     # CPU Usage
     $cpu = Get-Counter '\Processor(_Total)\% Processor Time' -ErrorAction SilentlyContinue
     if ($cpu) {
@@ -302,7 +302,7 @@ function Show-SystemHealth {
         Write-Host "  CPU Usage: " -NoNewline -ForegroundColor $Script:Colors.Info
         Write-Host "$cpuValue%" -ForegroundColor $cpuColor
     }
-    
+
     # Memory Usage
     $os = Get-CimInstance Win32_OperatingSystem
     $totalMem = [math]::Round($os.TotalVisibleMemorySize / 1MB, 2)
@@ -310,11 +310,11 @@ function Show-SystemHealth {
     $usedMem = $totalMem - $freeMem
     $memPercent = [math]::Round(($usedMem / $totalMem) * 100, 1)
     $memColor = if ($memPercent -lt 70) { $Script:Colors.Success } elseif ($memPercent -lt 90) { $Script:Colors.Warning } else { $Script:Colors.Error }
-    
+
     Write-Host "  Memory: " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "$memPercent% " -NoNewline -ForegroundColor $memColor
     Write-Host "($usedMem GB / $totalMem GB)" -ForegroundColor $Script:Colors.Dim
-    
+
     # Disk Space
     $disk = Get-PSDrive C
     $diskUsedGB = [math]::Round(($disk.Used / 1GB), 2)
@@ -322,16 +322,16 @@ function Show-SystemHealth {
     $diskTotalGB = $diskUsedGB + $diskFreeGB
     $diskPercent = [math]::Round(($diskUsedGB / $diskTotalGB) * 100, 1)
     $diskColor = if ($diskPercent -lt 80) { $Script:Colors.Success } elseif ($diskPercent -lt 95) { $Script:Colors.Warning } else { $Script:Colors.Error }
-    
+
     Write-Host "  Disk (C:): " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "$diskPercent% " -NoNewline -ForegroundColor $diskColor
     Write-Host "($diskFreeGB GB free)" -ForegroundColor $Script:Colors.Dim
-    
+
     # Node.js Version
     $nodeVersion = & node --version 2>$null
     Write-Host "  Node.js: " -NoNewline -ForegroundColor $Script:Colors.Info
     Write-Host "$nodeVersion" -ForegroundColor $Script:Colors.Success
-    
+
     # Log directory size
     if (Test-Path $Script:LogsDir) {
         $logSize = (Get-ChildItem $Script:LogsDir -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
@@ -339,7 +339,7 @@ function Show-SystemHealth {
         Write-Host "  Logs Size: " -NoNewline -ForegroundColor $Script:Colors.Info
         Write-Host "$logSizeMB MB" -ForegroundColor $Script:Colors.Dim
     }
-    
+
     Write-Host ""
     Write-Host "╚═══════════════════════════════════════════════════════════════╝" -ForegroundColor $Script:Colors.Title
     Write-Host ""
@@ -351,23 +351,23 @@ function New-AutoStartTask {
     Write-Host ""
     Write-Host "⚙️  Setting up Windows auto-start task..." -ForegroundColor $Script:Colors.Info
     Write-Host ""
-    
+
     $taskName = "MCP-Autostart"
     $scriptPath = Join-Path $Script:ScriptsDir "Start-Autostart.ps1"
-    
+
     # Check if task already exists
     $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
     if ($existingTask) {
         Write-Host "  ℹ Task already exists. Removing old task..." -ForegroundColor $Script:Colors.Warning
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
     }
-    
+
     # Create the task
     $action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument "-NoProfile -WindowStyle Hidden -File `"$scriptPath`""
     $trigger = New-ScheduledTaskTrigger -AtLogon -User $env:USERNAME
     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
     $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
-    
+
     try {
         Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description "Auto-start MCP servers on login" | Out-Null
         Write-Host "  ✓ Auto-start task created successfully!" -ForegroundColor $Script:Colors.Success
@@ -376,7 +376,7 @@ function New-AutoStartTask {
     } catch {
         Write-Host "  ✗ Failed to create task: $($_.Exception.Message)" -ForegroundColor $Script:Colors.Error
     }
-    
+
     Write-Host ""
     Write-Host "Press any key to continue..." -ForegroundColor $Script:Colors.Dim
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
@@ -385,24 +385,24 @@ function New-AutoStartTask {
 function Start-Dashboard {
     while ($true) {
         Write-DashboardHeader
-        
+
         $status = Get-MCPServersStatus
         Show-ServerStatus -Status $status
         Show-WorkflowsMenu
         Show-MainMenu
-        
+
         $choice = Read-Host "Select action"
-        
+
         switch ($choice.ToUpper()) {
             "1" { Start-WorkflowInteractive }
             "2" { Start-AutostartServers }
             "3" { Stop-AllMCPServers }
-            "4" { 
+            "4" {
                 Stop-AllMCPServers
                 Start-Sleep -Seconds 2
                 Start-AutostartServers
             }
-            "5" { 
+            "5" {
                 Write-Host ""
                 Write-Host "Recent logs:" -ForegroundColor $Script:Colors.Info
                 Get-ChildItem $Script:LogsDir -Filter "*.log" -ErrorAction SilentlyContinue | ForEach-Object {
@@ -413,7 +413,7 @@ function Start-Dashboard {
                 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             }
             "6" { Show-SystemHealth }
-            "7" { 
+            "7" {
                 Write-Host ""
                 Write-Host "Creating backup..." -ForegroundColor $Script:Colors.Info
                 & (Join-Path $Script:ScriptsDir "mcp-manager.ps1") -Action backup
@@ -423,13 +423,13 @@ function Start-Dashboard {
             }
             "8" { New-AutoStartTask }
             "R" { continue }
-            "Q" { 
+            "Q" {
                 Write-Host ""
                 Write-Host "👋 Goodbye!" -ForegroundColor $Script:Colors.Success
                 Write-Host ""
                 exit 0
             }
-            default { 
+            default {
                 Write-Host ""
                 Write-Host "  ✗ Invalid selection" -ForegroundColor $Script:Colors.Error
                 Start-Sleep -Seconds 1
@@ -443,7 +443,7 @@ switch ($Mode) {
     "dashboard" { Start-Dashboard }
     "start" { Start-AutostartServers }
     "stop" { Stop-AllMCPServers }
-    "status" { 
+    "status" {
         $status = Get-MCPServersStatus
         Show-ServerStatus -Status $status
     }
@@ -451,4 +451,3 @@ switch ($Mode) {
     "health" { Show-SystemHealth }
     default { Start-Dashboard }
 }
-

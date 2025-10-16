@@ -15,13 +15,13 @@ param(
     [Parameter()]
     [ValidateSet("daily", "development", "research", "automation", "cybersecurity", "redTeam", "osint", "webDevelopment", "organization")]
     [string]$Workflow = "daily",
-    
+
     [Parameter()]
     [switch]$Dashboard,
-    
+
     [Parameter()]
     [switch]$Status,
-    
+
     [Parameter()]
     [switch]$Stop
 )
@@ -67,14 +67,14 @@ if ($Status) {
         & $StatusScript
     } else {
         Write-Host "  ✗ Status script not found" -ForegroundColor Red
-        
+
         # Fallback status check
         Write-Host "  Checking for running MCP processes..." -ForegroundColor Yellow
         $mcpProcesses = Get-Process -Name "node" | Where-Object {
             $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $($_.Id)").CommandLine
             $cmdLine -like "*@modelcontextprotocol*" -or $cmdLine -like "*puppeteer-mcp*"
         }
-        
+
         if ($mcpProcesses) {
             Write-Host "  ✓ Found $($mcpProcesses.Count) running MCP server(s)" -ForegroundColor Green
             $mcpProcesses | ForEach-Object {
@@ -99,7 +99,7 @@ if ($Stop) {
             $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $($_.Id)").CommandLine
             $cmdLine -like "*@modelcontextprotocol*" -or $cmdLine -like "*puppeteer-mcp*"
         }
-        
+
         if ($mcpProcesses) {
             $mcpProcesses | Stop-Process -Force
             Write-Host "  ✓ Stopped $($mcpProcesses.Count) MCP server(s)" -ForegroundColor Green
@@ -125,7 +125,7 @@ $masterConfig = Join-Path $ScriptRoot "configs" "master-config.json"
 if ((Test-Path $cliPath) -and (Test-Path $masterConfig)) {
     try {
         & node $cliPath start-workflow $Workflow -c $masterConfig
-        
+
         Write-Host ""
         Write-Host "  ✓ Workflow started successfully!" -ForegroundColor Green
         Write-Host ""
@@ -148,7 +148,7 @@ if ((Test-Path $cliPath) -and (Test-Path $masterConfig)) {
         Write-Host "  Error: $($_.Exception.Message)" -ForegroundColor Red
         Write-Host ""
         Write-Host "  Falling back to autostart script..." -ForegroundColor Yellow
-        
+
         if (Test-Path $AutostartScript) {
             & $AutostartScript
         }
@@ -156,7 +156,7 @@ if ((Test-Path $cliPath) -and (Test-Path $masterConfig)) {
 } else {
     Write-Host "  ⚠️  MCP CLI not found, using autostart script..." -ForegroundColor Yellow
     Write-Host ""
-    
+
     if (Test-Path $AutostartScript) {
         & $AutostartScript
         Write-Host ""
@@ -170,4 +170,3 @@ if ((Test-Path $cliPath) -and (Test-Path $masterConfig)) {
 Write-Host ""
 Write-Host "  💡 Tip: Run with -Dashboard for interactive control" -ForegroundColor Cyan
 Write-Host ""
-
