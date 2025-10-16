@@ -2,8 +2,10 @@
   "name": "web-search",
   "type": "mcp-server",
   "description": "Web search integration for real-time information retrieval",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-brave-search"
   ],

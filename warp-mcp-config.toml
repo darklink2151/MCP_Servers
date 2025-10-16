@@ -10,7 +10,15 @@ data_dir = "C:\\Users\\beckd\\MCP_Servers\\data"
 # Servers configuration
 [mcp.servers.filesystem]
 command = "npx"
-args = ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\beckd\\MCP_Servers"]
+args = [
+  "-y", "@modelcontextprotocol/server-filesystem",
+  "C:\\Users\\beckd",
+  "C:\\",
+  "C:\\Users\\beckd\\Documents",
+  "C:\\Users\\beckd\\OneDrive\\Documents",
+  "C:\\Users\\beckd\\Downloads",
+  "C:\\Users\\beckd\\Desktop"
+]
 env = {}
 
 [mcp.servers.memory]
@@ -23,9 +31,29 @@ command = "npx"
 args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
 env = {}
 
-[mcp.servers.everything_search]
+[mcp.servers.everything]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-everything"]
+env = {}
+
+[mcp.servers.fetch]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-fetch"]
+env = {}
+
+[mcp.servers.sqlite]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sqlite"]
+env = {}
+
+[mcp.servers.github]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+env = {}
+
+[mcp.servers.brave_search]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-brave-search"]
 env = {}
 
 [mcp.servers.puppeteer]

@@ -2,16 +2,18 @@
   "name": "filesystem",
   "type": "mcp-server",
   "description": "Enhanced filesystem access with advanced capabilities",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-filesystem",
-    "${HOME}",
-    "${SYSTEM_ROOT}",
-    "${DOCUMENTS}",
-    "${ONEDRIVE_DOCUMENTS}",
-    "${DOWNLOADS}",
-    "${DESKTOP}"
+    "C:\\Users\\beckd",
+    "C:\\",
+    "C:\\Users\\beckd\\Documents",
+    "C:\\Users\\beckd\\OneDrive\\Documents",
+    "C:\\Users\\beckd\\Downloads",
+    "C:\\Users\\beckd\\Desktop"
   ],
   "env": {},
   "permissions": [

@@ -2,8 +2,10 @@
   "name": "github",
   "type": "mcp-server",
   "description": "GitHub integration for repository operations and collaboration",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-github"
   ],

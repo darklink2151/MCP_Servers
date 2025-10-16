@@ -2,8 +2,10 @@
   "name": "sqlite",
   "type": "mcp-server",
   "description": "SQLite database integration for structured data storage and analysis",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-sqlite"
   ],

@@ -2,8 +2,10 @@
   "name": "metasploit",
   "type": "mcp-server",
   "description": "Metasploit Framework integration for exploitation and post-exploitation activities",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-metasploit"
   ],

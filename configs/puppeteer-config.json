@@ -2,10 +2,12 @@
   "name": "puppeteer",
   "type": "mcp-server",
   "description": "Browser automation for web interaction and scraping",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
-    "@modelcontextprotocol/server-puppeteer"
+    "@todoforai/puppeteer-mcp-server"
   ],
   "env": {},
   "browser": {

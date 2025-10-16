@@ -1,0 +1,76 @@
+# MCP Servers .gitignore
+
+# Logs
+logs/*.log
+*.log
+
+# Node modules
+node_modules/
+scripts/node_modules/
+**/node_modules/
+
+# Package lock files (optional - uncomment if you want to ignore them)
+# package-lock.json
+# scripts/package-lock.json
+
+# Environment variables and secrets
+.env
+.env.local
+*.key
+*.pem
+secrets/
+**/secrets/
+
+# Data and databases
+data/*.db
+data/*.sqlite
+data/cache/
+databases/*.db
+databases/*.sqlite
+
+# Backups (keep structure, ignore contents)
+backups/*
+!backups/.gitkeep
+
+# Resources (keep structure, ignore large files)
+resources/downloads/*
+resources/screenshots/*
+resources/memory-store/*
+!resources/**/.gitkeep
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editor files
+.vscode/*
+!.vscode/settings.json.template
+.idea/
+*.swp
+*.swo
+*~
+
+# Build outputs
+dist/
+build/
+*.exe
+*.dll
+
+# API keys and tokens (extra safety)
+*token*
+*apikey*
+*api-key*
+*secret*
+!SETUP-*.md
+!*-config.json
+
+# Session files
+.vscode/sessions.json
+

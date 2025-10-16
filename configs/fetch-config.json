@@ -2,8 +2,10 @@
   "name": "fetch",
   "type": "mcp-server",
   "description": "HTTP request client for direct web interactions",
-  "command": "npx",
+  "command": "cmd.exe",
   "args": [
+    "/c",
+    "npx",
     "-y",
     "@modelcontextprotocol/server-fetch"
   ],
