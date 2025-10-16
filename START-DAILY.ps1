@@ -17,13 +17,13 @@ $masterConfig = Join-Path $PSScriptRoot "configs" "master-config.json"
 
 Write-Host "🚀 Starting daily MCP environment..." -ForegroundColor Cyan
 
-# Start the workflow using optimized method
-$optimizedScript = Join-Path $PSScriptRoot "scripts" "Start-Optimized.ps1"
-if (Test-Path $optimizedScript) {
-    Write-Host "🚀 Using optimized startup method..." -ForegroundColor Green
-    & $optimizedScript -WorkflowName $defaultWorkflow -ConfigPath $masterConfig
+# Start the workflow using basic method
+$basicScript = Join-Path $PSScriptRoot "scripts" "Start-Basic.ps1"
+if (Test-Path $basicScript) {
+    Write-Host "🚀 Using basic startup method..." -ForegroundColor Green
+    & $basicScript -WorkflowName $defaultWorkflow -ConfigPath $masterConfig
 } else {
-    Write-Host "⚠️ Optimized script not found, using legacy method..." -ForegroundColor Yellow
+    Write-Host "⚠️ Basic script not found, using fallback method..." -ForegroundColor Yellow
     # Fallback to original method
     $startWorkflowScript = Join-Path $PSScriptRoot "scripts" "Start-Workflow.ps1"
     if (Test-Path $startWorkflowScript) {
@@ -61,3 +61,4 @@ if ($createShortcut) {
     $shortcut.Save()
     Write-Host "`n✅ Desktop shortcut created!" -ForegroundColor Green
 }
+
