@@ -61,4 +61,3 @@ if ($createShortcut) {
     $shortcut.Save()
     Write-Host "`n✅ Desktop shortcut created!" -ForegroundColor Green
 }
-
